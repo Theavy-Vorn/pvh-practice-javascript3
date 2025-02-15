@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table id="table" border="1">
+    
+    </table>
+</body>
+<script>
+    const table = document.getElementById("table");
+    const dataContainer = [
+        {
+            name:"koko",
+            date: "2022-12-20",
+            priority: "High",
+            status: "Pending"
+        },
+        
+    ]
+    
+    const person = {
+        name:"koko",
+        date: "2022-12-20",
+        priority: "High",
+        status: "Pending"
+    }
+
+    dataContainer.push(person);
+    console.log(dataContainer);
+    
+    
+
+
+
+
+    for (let i = 0; i <dataContainer.length; i++) {
+        display += `
+        <tr>
+            <td>${dataContainer[i].name}</td>
+            <td>${dataContainer[i].date}</td>
+            <td>${dataContainer[i].priority}</td>
+            <td>${dataContainer[i].status}</td>
+        </tr>`
+    }
+    table.innerHTML = display;
+    </script>
+</html>
+
+
+//  // Create a task object
+        //  const task = {
+        //         name: task_name,
+        //         date: task_date,
+        //         priority: task_priority,
+        //         status: "Pending"
+        //     };
+
+        //     // const array = ["a", "b", "c", "d", "e",];
+        //     const arrayInt = [1,2,3,4,5,6,7,8,9,10,11];
+        
+            
+
+
+        //     let arrayObject = [
+        //         {
+        //             name:"koko",
+        //             date: "2022-12-20",
+        //             priority: "High",
+        //             status: "Pending"
+        //         },
+        //         {
+        //             name:"koko",
+        //             date: "2022-12-20",
+        //             priority: "High",
+        //             status: "Pending"
+        //         },
+        //         {
+        //             name:"koko",
+        //             date: "2022-12-20",
+        //             priority: "High",
+        //             status: "Pending"
+        //         },
+        //     ];
+
+
+            
+
+            
