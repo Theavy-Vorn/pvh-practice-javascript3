@@ -8,8 +8,7 @@
 </head>
 <body>
     <div class="font-bold text-3xl w-full mt-5 mb-10 text-center">Practice JavaScript</div>
-    <div class="w-4/5 mx-auto grid grid-cols-2 gap-6">
-        
+    <div class="w-4/5 mx-auto grid grid-cols-2 gap-6"> 
         <form id="add">
             <div class="text-2xl font-bold">Add Task</div>
             <div class="grid gap-6 mb-6 ">
@@ -27,12 +26,10 @@
                         <option value="Medium">Medium</option>
                         <option value="Low">Low</option>
                     </select>
-
                     <button type="submit" class="mt-4 text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-sm px-5 py-2.5 w-2/5">Add New Task</button>
                 </div>
             </div>
         </form>
-
         <div>
             <div class="text-2xl font-bold mb-6">Task List</div>
             <table class="w-full text-sm text-left text-gray-500 border">
@@ -45,30 +42,19 @@
                     </tr>
                 </thead>
                 <tbody id="task-table">
-
-                    <button id="test">buton</button>
                 </tbody>
             </table>
         </div>
-    </div>
-    
- 
-
-
+    </div>   
     <script>   
-        // const timestamp = Date.now();
-        // console.log(timestamp);
         const form = document.getElementById('add');
         const taskTable = document.getElementById('task-table');
         const tasks = [];
-        
         form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
+            event.preventDefault();  
             let taskName = document.getElementById('name').value;
             let taskDate = document.getElementById('date_day').value;
             let taskPriority = document.getElementById('priority').value;
-
             // Add task to array
             const task = {
                 name: taskName,
@@ -80,65 +66,23 @@
             table();
             form.reset();
         });
-        // ---------------------------table list
-
-        
-
-    //     function table(){  
-    //         taskTable.innerHTML = ""; 
-    //         for (let i = 0; i < tasks.length; i++) {
-
-    //             let task = tasks[i]; 
-
-    //             console.log(task);
-
-    //             let row = `
-    //                 <tr class="bg-white border">
-    //                     <td class="px-6 py-4">${task.name}</td>
-    //                     <td class="px-6 py-4">
-    //                         ${task.date_day}
-    //                     </td>
-    //                    <td class="px-6 py-4">
-    //                         ${task.priority}
-    //                     </td>
-    //                     <td class="px-6 py-4">
-    //                         <button class=${`status-btn text-white px-3 py-1 rounded bg-green-500`} data-index=${i}>${task.status}</button>
-    //                     </td>
-    //                 </tr>
-    //             `;
-    //             taskTable.innerHTML += row;
-    //         }    
-           
-
-
-
-     
-
-
-    //     document.querySelectorAll(".status-btn").forEach((button) => {
-    //       button.addEventListener("click", function () {
-    //         let index = this.getAttribute("data-index");
-    //         tasks[index].status =
-    //           tasks[index].status === "Pending" ? "Complete" : "Pending";
-    //         table(); // Re-render table
-    //       });
-    //     });
-    // }
-    
-    function table() {
-        taskTable.innerHTML = "";
-        for (let i = 0; i < tasks.length; i++) {
-          let task = tasks[i];
-          let row = document.createElement("tr");
-          row.classList.add("bg-white", "border");
-
-          row.innerHTML = `
+        // -------------------------------------table list
+            function table() {
+                taskTable.innerHTML = "";
+                for (let i = 0; i < tasks.length; i++) {
+                let task = tasks[i];
+                let row = document.createElement("tr");
+                row.classList.add("bg-white", "border");
+                row.innerHTML = `
                     <td class="px-6 py-4">${task.name}</td>
                     <td class="px-6 py-4">${task.date_day}</td>
-                    <td class="px-6 py-4">${task.priority}</td>
+                    <td class="px-6 py-4
+                        ${task.priority === 'High' ? 'text-rose-500' : task.priority === 'Medium' ? 'text-yellow-500' : 'text-green-500'}">
+                        ${task.priority}
+                    </td>
                     <td class="px-6 py-4">
                         <button class="status-btn text-white px-3 py-1 rounded ${
-                          task.status === "Pending"
+                        task.status === "Pending"
                             ? "bg-red-500"
                             : "bg-green-500"
                         }" data-index="${i}">
@@ -146,188 +90,22 @@
                         </button>
                     </td>
                 `;
-
-           taskTable.appendChild(row);
-        //   appendChild = add 1 tr 
+            taskTable.appendChild(row);
+            //   appendChild = add 1 tr 
+            }
+            let btnlist= document.querySelectorAll(".status-btn");
+            for(let i=0;i<btnlist.length;i++){
+                // console.log(btnlist[i]);
+                btnlist[i].addEventListener("click",()=>{
+                    // console.log(btnlist[i].getAttribute("data-oo"));
+                    let index = btnlist[i].getAttribute('data-index');
+                    tasks[index].status= tasks[index].status==='Pending'?'Completed':'Pending';
+                    console.log(tasks[i])
+                    table(); 
+                })
+            } 
         }
-
-        
-        // Add event listeners to all status buttons
-        // document.querySelectorAll(".status-btn").forEach((button) => {
-        //   button.addEventListener("click", function () {
-        //     let index = this.getAttribute("data-index");
-        //     console.log(index)
-        //     console.log(tasks[index])
-        //     tasks[index].status =
-        //       tasks[index].status === "Pending" ? "Complete" : "Pending";
-        //     table(); // Re-render table
-        //   });
-        // });
-        //document.querySelectorAll : get querySelector all 
-        let btnlist= document.querySelectorAll(".status-btn");
-        for(let i=0;i<btnlist.length;i++){
-            // console.log(btnlist[i]);
-            btnlist[i].addEventListener("click",()=>{
-                // console.log(btnlist[i].getAttribute("data-oo"));
-                let index =btnlist[i].getAttribute('data-index');
-                tasks[index].status= tasks[index].status==='Pending'?'Completed':'Pending';
-                table(); 
-            })
-        } 
-    }
-
-    
-
-        
-    
     </script>
 </body>
 </html>
-
-
-
-<!-- // ${task.priority === 'High' ? 'text-rose-500' : task.priority === 'Medium' ? 'text-yellow-500' : 'text-green-500'}">
-// ${task.priority} -->
-
-<!-- <button onclick="status(${i})" class="text-white px-3 py-1 rounded ${task.status === 'Pending' ? 'bg-yellow-500' : 'bg-green-500'}">
-    ${task.status}
-</button> -->
-<!-- function status(index) {
-    tasks[index].status = tasks[index].status === "Pending" ? "Completed" : "Pending";
-    table();
-} -->
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>practice2</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-    </style>
-</head>
-<body>
-    <div class="font-bold text-3xl w-full mt-5 mb-10 text-center">Practice Javascript</div>
-    <div class="w-4/5 mx-auto">   
-        <form id="add">
-            <div class="text-2xl font-bold">Add List</div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
-                <div>
-                    <div class="add-task">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task name</label>
-                        <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
-                    </div>
-                    <div>
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose Date</label>
-                        <input type="date" id="date_day" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" required />
-                    </div> 
-                    <div>
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
-                        <select id="priority" class=" mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select Priority</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                    </div>
-                    <button type="submit" onclick="addform()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                </div>
-                <div id="t-tist">
-                    
-                    <div class="relative overflow-x-auto">
-                        <div class="text-2xl font-bold mb-6">Task List</div>
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        TASK NAEM
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        DUE DATE
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        PRRORITY
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        STATUS
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr class="bg-white dark:bg-gray-800">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                       
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        
-                                    </td>
-                                    <td class="px-6 py-4">
-                                       
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button>Pending</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-        </form>
-
-    </div>
-    <script>
-       const form_add = document.getElementById('add');
-       const table_list = document.getElementById('t-list');
-       const tasks = [];
-       
-        form_add.addEventListener('submit', function(event){
-        event.preventDefault();
-        let task_name = document.getElementById('name').value;
-        let task_date = document.getElementById('date_day').value;
-        let task_priority = document.getElementById('priority').value;
-
-        console.log("Name: " + task_name);
-        console.log("Date: " + task_date);
-        console.log("Priority: " + task_priority);
-       })
-
-       const task_main =[
-            {
-                name: task_name,
-                date: task_date,
-                priority: task_priority,
-                status: "Pending"  
-            }
-       ]
-       
-
-       const task = {
-            name: task_name,
-            date: task_date,
-            priority: task_priority,
-            status: "Pending"
-        };
-        tasks.push(task);
-        console.log(task)
-
-        
-        for (let i = 0; i <task.length; i++) {
-        display += `
-        <tr>
-            <td>${dataContainer[i].name}</td>
-            <td>${dataContainer[i].date}</td>
-            <td>${dataContainer[i].priority}</td>
-            <td>${dataContainer[i].status}</td>
-        </tr>`
-    }
-
-
-    </script>
-
-</body>
-</html> -->
+          
